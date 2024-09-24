@@ -3,6 +3,9 @@
     <% for(message of messages) { %>
     <li>
       <span><%= `${message.user}: ${message.text}` %></span>
+      <a href=<%= `/message/${message.id}` %>
+        ><button>Details</button></a
+      >
       <span style="font-size: 0.8rem; display: block; text-align: end"
         ><%= message.added.toLocaleDateString() %></span
       >
