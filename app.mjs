@@ -19,9 +19,21 @@ const messages = [
 
 app.set("views", path.join(import.meta.dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.render("messages", { messages });
+});
+app.get("/new", (req, res) => {
+  res.render("form");
+});
+app.post("/new", (req, res) => {
+  messages.push({
+    text: req.body.messageText,
+    user: req.body.messageUser,
+    added: new Date(),
+  });
+  res.redirect("/");
 });
 
 app.listen(PORT, () =>
