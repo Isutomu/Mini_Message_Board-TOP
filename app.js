@@ -1,7 +1,8 @@
-import express from "express";
-import "dotenv/config";
-import path from "node:path";
-import { v4 as uuidv4 } from "uuid";
+require("dotenv").config();
+
+const { v4: uuidv4 } = require("uuid");
+const express = require("express");
+const path = require("node:path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,7 +21,7 @@ const messages = [
   },
 ];
 
-app.set("views", path.join(import.meta.dirname, "views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
