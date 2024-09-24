@@ -1,0 +1,12 @@
+<div>
+  <ul>
+    <% for(message of messages) { %>
+    <li>
+      <span><%= `${message.user}: ${message.text}` %></span>
+      <span style="font-size: 0.8rem; display: block; text-align: end"
+        ><%= message.added.toLocaleDateString() %></span
+      >
+    </li>
+    <% } %>
+  </ul>
+</div>
