@@ -1,5 +1,4 @@
 const { Pool } = require("pg");
-const { ssl } = require("pg/lib/defaults");
 
 module.exports = new Pool({
   host: process.env.DATABASE_HOST,
