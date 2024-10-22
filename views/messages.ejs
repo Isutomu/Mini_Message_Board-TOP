@@ -2,7 +2,7 @@
   <ul>
     <% for(message of messages) { %>
     <li>
-      <span><%= `${message.user}: ${message.text}` %></span>
+      <span><%= `${message.username}: ${message.text}` %></span>
       <a href=<%= `/message/${message.id}` %>
         ><button>Details</button></a
       >
