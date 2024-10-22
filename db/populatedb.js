@@ -1,27 +1,20 @@
 const { Client } = require("pg");
-require("dotenv").config();
 
-const SQL = `
+const createTableSQL = `
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     text VARCHAR ( 1000 ),
     username VARCHAR ( 255 ),
-    added TIMESTAMPTZ
+    added TIMESTAMP
 );
-
+`;
+const populateTableSQL = `
 INSERT INTO messages (text, username, added)
 VALUES
-    (
-    text: "Hi there!",
-    user: "Amando",
-    added: ${new Date()}
-    ),
-    (
-    text: "Hello World!",
-    user: "Charles",
-    added: ${new Date()}
-    );
+    ('Hi there!', 'Amando', $1),
+    ('Hello World!', 'Charles', $2);
 `;
+
 const CONNECTION_STRING = process.argv[2];
 
 async function main() {
@@ -30,7 +23,8 @@ async function main() {
     connectionString: CONNECTION_STRING,
   });
   await client.connect();
-  await client.query(SQL);
+  await client.query(createTableSQL);
+  await client.query(populateTableSQL, [new Date(), new Date()]);
   await client.end();
   console.log("done");
 }
