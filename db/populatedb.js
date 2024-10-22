@@ -1,4 +1,5 @@
 const { Client } = require("pg");
+const { ssl } = require("pg/lib/defaults");
 
 const createTableSQL = `
 CREATE TABLE IF NOT EXISTS messages (
@@ -21,6 +22,7 @@ async function main() {
   console.log("seeding...");
   const client = new Client({
     connectionString: CONNECTION_STRING,
+    ssl: true,
   });
   await client.connect();
   await client.query(createTableSQL);
